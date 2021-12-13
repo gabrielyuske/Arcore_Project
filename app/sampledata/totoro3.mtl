@@ -1,0 +1,25 @@
+# Exported from 3D Builder
+
+newmtl eyes_|_sclera_0_0
+Kd 0.953327 0.921650 0.896482
+
+newmtl skin_0_0
+Kd 0.438768 0.500198 0.506660
+
+newmtl leaf_|_stalk_0_0
+Kd 0.266667 0.568628 0.172549
+
+newmtl nose_0_0
+Kd 0.219993 0.219993 0.219993
+
+newmtl belly_0_0
+Kd 0.882379 0.906332 0.668296
+
+newmtl eyes_|_pupil_0_0
+Kd 0.099993 0.099993 0.099993
+
+newmtl claws_0_0
+Kd 0.213327 0.213327 0.213327
+
+newmtl whiskers_0_0
+Kd 0.053327 0.053327 0.053327

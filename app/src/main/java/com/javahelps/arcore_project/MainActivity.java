@@ -1,96 +1,165 @@
 package com.javahelps.arcore_project;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
+import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.sceneform.AnchorNode;
-import com.google.ar.sceneform.math.Quaternion;
-import com.google.ar.sceneform.math.Vector3;
+import com.google.ar.sceneform.FrameTime;
+import com.google.ar.sceneform.Scene;
+import com.google.ar.sceneform.animation.ModelAnimator;
+import com.google.ar.sceneform.rendering.AnimationData;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
+import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
+import com.javahelps.arcore_project.R;
+
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int CAMERA_PERMISSION_CODE = 0;
-    private static final String CAMERA_PERMISSION = Manifest.permission.CAMERA;
-    private ModelRenderable modelRenderable;
+
+    //Variable
+    private ArFragment arFragment;
+    private AnchorNode anchorNode;
+    private ModelAnimator animator;
+    private int nextAnimation;
+    private FloatingActionButton btn_anim;
+    private ModelRenderable animationAR;
+    private TransformableNode transformableNode;
+    private MediaPlayer mediaPlayer1=null;
+    private ImageView button_play;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        button_play = findViewById(R.id.start);
+        button_play.setOnClickListener( new View.OnClickListener()   {
+            @Override
+            public void onClick(View view) {
 
-        ArFragment arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ar_fragment);
+                if(mediaPlayer1 == null || !mediaPlayer1.isPlaying()) {
+                    music_start();
+                } else {
+                    music_stop();
+                }
+            }
+        });
 
-        #3Dオブジェクトの表示
-        ModelRenderable.builder()
-                .setSource(this, R.raw.ball)
-                .build()
-                .thenAccept(renderable -> modelRenderable = renderable)
-                .exceptionally(
-                        throwable -> {
-                            Toast toast =
-                                    Toast.makeText(this, "読み込み失敗", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                            return null;
-                        });
+        arFragment = (ArFragment)getSupportFragmentManager()
+                .findFragmentById(R.id.ar_fragment);
+        //Tap on plane event
+        arFragment.setOnTapArPlaneListener(new BaseArFragment.OnTapArPlaneListener() {
+            @Override
+            public void onTapPlane(HitResult hitResult, Plane plane, MotionEvent motionEvent) {
+                if(animationAR ==null)
+                    return;
+                //Create the Anchor
+                Anchor anchor = hitResult.createAnchor();
+                if(anchorNode == null)
+                {
+                    anchorNode = new AnchorNode(anchor);
+                    anchorNode.setParent(arFragment.getArSceneView().getScene());
 
+                    transformableNode = new TransformableNode(arFragment.getTransformationSystem());
 
+                    transformableNode.getScaleController().setMinScale(0.01f);
+                    transformableNode.getScaleController().setMaxScale(2.0f);
+                    transformableNode.setParent(anchorNode);
+                    transformableNode.setRenderable(animationAR);
+                }
+            }
+        });
 
-        if(arFragment != null ) {
-
-            arFragment.setOnTapArPlaneListener(
-                    (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
-
-                        if (modelRenderable == null) {
-
-                            return;
+        //Add frame update to control state of button
+        arFragment.getArSceneView().getScene()
+                .addOnUpdateListener(new Scene.OnUpdateListener(){
+                    public void onUpdate(FrameTime frameTime){
+                        if (anchorNode == null)
+                        {
+                            if (btn_anim.isEnabled())
+                            {
+                                btn_anim.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                                btn_anim.setEnabled(false);
+                            }
                         }
-                        Anchor anchor = hitResult.createAnchor();
-                        AnchorNode anchorNode = new AnchorNode(anchor);
-                        anchorNode.setParent(arFragment.getArSceneView().getScene());
-                        TransformableNode model = new TransformableNode(arFragment.getTransformationSystem());
-                        model.setRenderable(modelRenderable);
+                        else
+                        {
+                            if (!btn_anim.isEnabled())
+                            {
+                                btn_anim.setBackgroundTintList(ContextCompat.getColorStateList(MainActivity.this,R.color.colorAccent));
+                                btn_anim.setEnabled(true);
+                            }
+                        }
+                    }
+                });
+        btn_anim = (FloatingActionButton)findViewById(R.id.btn_anim);
+        btn_anim.setEnabled(false);
+        btn_anim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(animator == null || !animator.isRunning())
+                {
+                    AnimationData data = animationAR.getAnimationData(nextAnimation);
+                    nextAnimation = (nextAnimation+1)%animationAR.getAnimationDataCount();
+                    animator = new ModelAnimator(data,animationAR);
+                    animator.start();
 
-                        //大きさを指定します。
-                        model.getScaleController().setMinScale(0.01f);
-                        model.getScaleController().setMaxScale(2.0f);
-                        //v:width v1:? v2:height
-                        model.setLocalScale(new Vector3(0.5f,0f,0.5f));
-                        //座標を指定します
-                        model.setLocalPosition(new Vector3(0,0.0f,0));
-                        //y軸　縦軸　を中心に１８０度回転
-                        model.setLocalRotation(Quaternion.axisAngle(new Vector3(0,1,0),-180));
-                        model.setParent(anchorNode);
-                        model.select();
+                }
+                if(mediaPlayer1 == null || !mediaPlayer1.isPlaying()) {
+                    music_start();
+                } else {
+                    music_stop();
+                }
+            }
+        });
 
+        setupModel();
+    }
+    private void music_start() {
 
+        mediaPlayer1 = MediaPlayer.create(getBaseContext(), R.raw.music);
+        mediaPlayer1.seekTo(0);
+        mediaPlayer1.start();
+        Drawable myDrawable = getResources().getDrawable(R.drawable.stop);
+        button_play.setImageDrawable(myDrawable);
+    }
+    private void music_stop() {
 
-                    });
-        }
-
+        if(mediaPlayer1 == null) return;
+        mediaPlayer1.stop();
+        mediaPlayer1.release();
+        mediaPlayer1 = null;
+        Drawable myDrawable = getResources().getDrawable(R.drawable.start);
+        button_play.setImageDrawable(myDrawable);
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        if (ContextCompat.checkSelfPermission(this, CAMERA_PERMISSION) != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(this, new String[] {CAMERA_PERMISSION}, CAMERA_PERMISSION_CODE);
-//        }
-//    }
+        private void setupModel() {
+//        res = getResource();
+//        InputStream is = res.openRawResource(R.raw.dancing);
+        ModelRenderable.builder()
+                .setSource(this,R.raw.dancing)
+                .build()
+                .thenAccept(renderable -> animationAR = renderable)
+                .exceptionally(throwable -> {
+                    Toast.makeText(this, ""+throwable.getMessage(), Toast.LENGTH_LONG).show();
+                    return null;
+                });
+    }
 }

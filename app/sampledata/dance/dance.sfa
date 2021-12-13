@@ -1,0 +1,69 @@
+{
+  animations: [
+    {
+      path: 'sampledata/dance/dance.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'Material_30',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: '3',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/dance/dance.fbx',
+    name: 'dance',
+    recenter: 'root',
+    scale: 135.76554899999999,
+  },
+  samplers: [
+    {
+      file: 'sampledata/dance\\dance.fbm\\3.png',
+      name: '3',
+      pipeline_name: 'dance.fbm\\3.png',
+    },
+  ],
+  version: '0.54:2',
+}

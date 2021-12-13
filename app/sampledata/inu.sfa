@@ -1,0 +1,108 @@
+{
+  materials: [
+    {
+      name: 'unnamed material',
+      parameters: [
+        {
+          baseColorFactor: null,
+        },
+        {
+          baseColor: null,
+        },
+        {
+          diffuseColorFactor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          diffuseColor: 'c320b5118732453ce1bbe2d9fc353f2adc2e9c40',
+        },
+        {
+          normal: '39fe6bff286e0778893c3fcb59d48dfbce91ed48',
+        },
+        {
+          metallicFactor: null,
+        },
+        {
+          roughnessFactor: null,
+        },
+        {
+          specularFactor: [
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          glossinessFactor: 1,
+        },
+        {
+          specularGlossiness: 'b7a212a6a16e26457040caf3bffeea69ced002c6',
+        },
+        {
+          specularGlossinessCalculation: null,
+        },
+        {
+          metallicRoughness: null,
+        },
+        {
+          occlusion: '2b1133cf40501b416de4f6b8b789c36f3a531d7c',
+        },
+        {
+          emissiveFactor: [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        {
+          emissive: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/gltf_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/models/inu.glb',
+    name: 'inu',
+    recenter: 'root',
+  },
+  samplers: [
+    {
+      name: 'c320b5118732453ce1bbe2d9fc353f2adc2e9c40',
+      pipeline_name: '*2',
+    },
+    {
+      name: 'b7a212a6a16e26457040caf3bffeea69ced002c6',
+      pipeline_name: '*3',
+    },
+    {
+      name: '2b1133cf40501b416de4f6b8b789c36f3a531d7c',
+      params: {
+        usage_type: 'Data',
+      },
+      pipeline_name: '*1',
+    },
+    {
+      name: '39fe6bff286e0778893c3fcb59d48dfbce91ed48',
+      params: {
+        usage_type: 'Normal',
+      },
+      pipeline_name: '*0',
+    },
+  ],
+  version: '0.54:2',
+}

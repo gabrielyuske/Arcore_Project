@@ -1,0 +1,68 @@
+{
+  animations: [
+    {
+      clips: [
+        {
+          name: 'Scene',
+        },
+      ],
+      path: 'sampledata/models/Shark.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'unnamed material',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: null,
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'Color',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/models/Shark.fbx',
+    name: 'Shark',
+    recenter: 'root',
+    scale: 0.58396099999999995,
+  },
+  version: '0.54:2',
+}

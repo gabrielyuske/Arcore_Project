@@ -1,0 +1,94 @@
+{
+  materials: [
+    {
+      name: 'unnamed material',
+      parameters: [
+        {
+          baseColorFactor: null,
+        },
+        {
+          baseColor: null,
+        },
+        {
+          diffuseColorFactor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          diffuseColor: '7f205589e65832b3d70a48690a84d126cd51b772',
+        },
+        {
+          normal: null,
+        },
+        {
+          metallicFactor: null,
+        },
+        {
+          roughnessFactor: null,
+        },
+        {
+          specularFactor: [
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          glossinessFactor: 1,
+        },
+        {
+          specularGlossiness: 'bacd4006826f25b4eac3884cb7ae14779d356f46',
+        },
+        {
+          specularGlossinessCalculation: null,
+        },
+        {
+          metallicRoughness: null,
+        },
+        {
+          occlusion: null,
+        },
+        {
+          emissiveFactor: [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        {
+          emissive: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/gltf_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/models/happybirthday.glb',
+    name: 'happybirthday',
+    recenter: 'root',
+  },
+  samplers: [
+    {
+      name: '7f205589e65832b3d70a48690a84d126cd51b772',
+      pipeline_name: '*0',
+    },
+    {
+      name: 'bacd4006826f25b4eac3884cb7ae14779d356f46',
+      pipeline_name: '*1',
+    },
+  ],
+  version: '0.54:2',
+}

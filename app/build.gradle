@@ -3,7 +3,7 @@ apply plugin: 'com.google.ar.sceneform.plugin'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.javahelps.arcore_project"
@@ -33,16 +33,25 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation 'com.google.ar:core:1.27.0'
     implementation 'com.google.android.material:material:1.4.0'
+//    implementation 'org.testng:testng:6.9.6'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     //ARCore関係
     implementation 'com.google.ar:core:1.15.0'
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
     implementation 'com.google.ar.sceneform:core:1.15.0'
+    // ARCoreアニメーション
+    implementation "com.google.ar.sceneform:animation:1.15.0"
+
+    implementation 'org.jetbrains:annotations:15.0'
+
+    //noinspection GradleCompatible
+//    implementation "com.android.support:support-compat:28.0.0"
+//    testImplementation 'org.hamcrest:hamcrest-core:1.1'
 
 }
-//sceneform.asset('sampledata/uploads_files_2773616_BaseSpiderMan.obj',
-//        'default',
-//        'sampledata/uploads_files_2773616_BaseSpiderMan.sfa',
-//        'src/main/res/raw/uploads_files_2773616_BaseSpiderMan')
+sceneform.asset('sampledata/models/dancing.fbx',
+        'default',
+        'sampledata/dancing.sfa',
+        'src/main/res/raw/dancing')

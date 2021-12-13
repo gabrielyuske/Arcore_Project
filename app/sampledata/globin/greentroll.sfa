@@ -1,0 +1,50 @@
+{
+  materials: [
+    {
+      name: 'Mat_0',
+      parameters: [
+        {
+          baseColor: 'texture_0_6195987693227547908',
+        },
+        {
+          baseColorTint: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          metallic: 0,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/globin/greentroll.obj',
+    name: 'greentroll',
+    recenter: 'root',
+    scale: 0.062939999999999996,
+  },
+  samplers: [
+    {
+      file: 'sampledata/globin\\texture_0_6195987693227547908.png',
+      name: 'texture_0_6195987693227547908',
+      pipeline_name: 'texture_0_6195987693227547908.png',
+    },
+  ],
+  version: '0.54:2',
+}

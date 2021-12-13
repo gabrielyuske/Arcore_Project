@@ -1,0 +1,62 @@
+{
+  animations: [
+    {
+      path: 'sampledata/models/test.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'Mat_0',
+      parameters: [
+        {
+          baseColor: [
+            0.59999999999999998,
+            0.59999999999999998,
+            0.59999999999999998,
+            1,
+          ],
+        },
+        {
+          baseColorMap: null,
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/models/test.fbx',
+    name: 'test',
+    recenter: 'root',
+    scale: 0.30939899999999998,
+  },
+  version: '0.54:2',
+}
