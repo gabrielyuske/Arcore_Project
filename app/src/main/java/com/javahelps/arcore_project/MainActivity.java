@@ -3,6 +3,7 @@ package com.javahelps.arcore_project;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -30,6 +31,7 @@ import com.google.ar.sceneform.ux.TransformableNode;
 import com.javahelps.arcore_project.R;
 
 import java.io.InputStream;
+import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private TransformableNode transformableNode;
     private MediaPlayer mediaPlayer1=null;
     private ImageView button_play;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     transformableNode = new TransformableNode(arFragment.getTransformationSystem());
 
                     transformableNode.getScaleController().setMinScale(0.01f);
-                    transformableNode.getScaleController().setMaxScale(2.0f);
+                    transformableNode.getScaleController().setMaxScale(1.5f);
                     transformableNode.setParent(anchorNode);
                     transformableNode.setRenderable(animationAR);
                 }
@@ -120,7 +123,9 @@ public class MainActivity extends AppCompatActivity {
                     nextAnimation = (nextAnimation+1)%animationAR.getAnimationDataCount();
                     animator = new ModelAnimator(data,animationAR);
                     animator.start();
-
+                }
+                else{
+                    animator.pause();
                 }
                 if(mediaPlayer1 == null || !mediaPlayer1.isPlaying()) {
                     music_start();
@@ -129,13 +134,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        setupModel();
+        setupModel(
+        );
     }
     private void music_start() {
 
         mediaPlayer1 = MediaPlayer.create(getBaseContext(), R.raw.music);
         mediaPlayer1.seekTo(0);
+        animator.resume();
         mediaPlayer1.start();
         Drawable myDrawable = getResources().getDrawable(R.drawable.stop);
         button_play.setImageDrawable(myDrawable);
@@ -150,6 +156,19 @@ public class MainActivity extends AppCompatActivity {
         button_play.setImageDrawable(myDrawable);
     }
 
+//    private void stopAnimation(ValueAnimator valueAnimator){
+//        if (valueAnimator.getCurrentPlayTime() <= valueAnimator.getDuration()) {
+//            float fraction = valueAnimator.getAnimatedFraction();
+//            if (mListener != null) {
+//                mListener.onViewAnimationUpdate(mView, valueAnimator, fraction);
+//            }
+//        }
+//    }
+//
+//    private void startAnimation() {
+//        mRotateAntiClockwiseAnimator.start();
+//        mRotateAntiClockwiseAnimator.setCurrentPlayTime(mCurrentPlayTime);
+//    }
         private void setupModel() {
 //        res = getResource();
 //        InputStream is = res.openRawResource(R.raw.dancing);
