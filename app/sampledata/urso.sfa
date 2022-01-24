@@ -1,0 +1,75 @@
+{
+  animations: [
+    {
+      path: 'sampledata/modelAR/urso.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'Material_50',
+      parameters: [
+        {
+          baseColor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColorMap: '169',
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'Color',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/modelAR/urso.fbx',
+    name: 'urso',
+    recenter: 'root',
+    scale: 10.027915999999999,
+  },
+  samplers: [
+    {
+      file: 'sampledata/modelAR\\urso.fbm\\169.png',
+      name: '169',
+      pipeline_name: 'urso.fbm\\169.png',
+    },
+    {
+      file: 'sampledata/modelAR\\urso.fbm\\173.png',
+      name: '173',
+      pipeline_name: 'urso.fbm\\173.png',
+    },
+  ],
+  version: '0.54:2',
+}

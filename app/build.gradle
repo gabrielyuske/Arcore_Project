@@ -51,7 +51,7 @@ dependencies {
 //    testImplementation 'org.hamcrest:hamcrest-core:1.1'
 
 }
-sceneform.asset('sampledata/models/dancing.fbx',
+sceneform.asset('sampledata/modelAR/rabbit.fbx',
         'default',
-        'sampledata/dancing.sfa',
-        'src/main/res/raw/dancing')
+        'sampledata/rabbit.sfa',
+        'src/main/res/raw/rabbit')

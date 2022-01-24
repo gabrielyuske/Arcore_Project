@@ -82,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
                     transformableNode = new TransformableNode(arFragment.getTransformationSystem());
 
-                    transformableNode.getScaleController().setMinScale(0.01f);
-                    transformableNode.getScaleController().setMaxScale(1.5f);
+                    transformableNode.getScaleController().setMinScale(30.0f);
+                    transformableNode.getScaleController().setMaxScale(60.5f);
                     transformableNode.setParent(anchorNode);
                     transformableNode.setRenderable(animationAR);
                 }
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void music_start() {
 
-        mediaPlayer1 = MediaPlayer.create(getBaseContext(), R.raw.music);
+        mediaPlayer1 = MediaPlayer.create(getBaseContext(), R.raw.futatsunokokoro);
         mediaPlayer1.seekTo(0);
         animator.resume();
         mediaPlayer1.start();
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
 //        res = getResource();
 //        InputStream is = res.openRawResource(R.raw.dancing);
         ModelRenderable.builder()
-                .setSource(this,R.raw.dancing)
+                .setSource(this,R.raw.soldado)
                 .build()
                 .thenAccept(renderable -> animationAR = renderable)
                 .exceptionally(throwable -> {
